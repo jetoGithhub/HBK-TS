@@ -1,15 +1,17 @@
-//import 'angular';
-//import '@uirouter/angularjs';
+import 'angular';
+import '@uirouter/angularjs';
+import 'angular-resource';
+import crud from './app/components/crud/crud.app.module';
 
-declare let angular: any;
+export const app = angular.module('app', ['ui.router','ngResource',crud.name]);
 
-export const app = angular.module('app', ['ui.router']);
+routesConfig.$inject = ['$stateProvider'];
 
-function Uno($stateProvider: any) {
+function routesConfig($stateProvider: any) {
     var helloState = {
         name: 'main',
         url: '/main',
-        template: '<h3>hello world!</h3>'
+        template: '<h3>hello world!  <crud-app-template></crud-app-template></h3>'
     }
 
     var aboutState = {
@@ -21,9 +23,8 @@ function Uno($stateProvider: any) {
     $stateProvider.state(helloState);
     $stateProvider.state(aboutState);
 }
-Uno.$inject = ['$stateProvider'];
 
-app.config(Uno);
+app.config(routesConfig);
 
 angular.element(document).ready(function() {
     angular.bootstrap(document.body, [ app.name ], {

@@ -1,5 +1,5 @@
 declare global {
-    //const angular: ng.IAngularStatic;
+    const angular: ng.IAngularStatic;
 }
 
 export {};
