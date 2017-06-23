@@ -1,0 +1,18 @@
+doctype html
+html
+    head
+        title Demo
+        base(href='/')
+        meta(charset='UTF-8')
+        script(src='//unpkg.com/angular@1.5/angular.js')
+        script(src='//unpkg.com/angular-ui-router@1.0.0-beta.3/release/angular-ui-router.js')
+        script(src='node_modules/systemjs/dist/system.src.js')
+        script(src='systemjs.config.js')
+        script.
+            System.import('main.js').catch(function(err){console.error(err.message);});
+        style.
+            .active { color: blue; font-weight: bold; }
+    body(ng-cloak)
+        a(ui-sref='main', ui-sref-active='active') Main
+        a(ui-sref='about', ui-sref-active='active') About
+        ui-view
