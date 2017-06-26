@@ -12,20 +12,21 @@ class CrudComponents implements ng.IComponentOptions{
 		this.controller = ComponentsController;
 		this.template ="" +
 			"<style>" +
-			":root{ --content-app-crud:{width: 100%; padding: 7px}}" +
+			":root{ --content-app-crud:{width: 1                                     00%; padding: 7px}}" +
 			".content{@apply(--content-crud)}" +
-			".content > table{width: 100%;border-spacing: none}" +
-			".content thead > tr {border-bottom: 2px solid black}"+
-			".content tbody > tr { width: 25%; padding: 3px; background: #dcdcdc;}" +
-			"tr{border: none; border-bottom-width: 1px; border-bottom-color: black; border-bottom-style: solid}"+
-			".content  tbody > tr:nth-child(even){background:darkgrey}"+
+			".content > table{width: 100%;border-spacing: none;border-collapse: collapse;}" +
+			".content > th  {font-size: 13px;font-weight: normal; padding: 8px;border-bottom:1px solid #000;color: #000;}"+
+			".content tbody > tr{ width: 25%; padding: 8px; background: #e8edff; border-bottom: 1px solid #fff;color: #669;border-top: 1px solid transparent; }" +
+			".content  tbody > tr:nth-child(even){background:#b9c9fe}"+
+			".content  thead > tr{border-bottom:2px solid black}"+
 			"</style>" +
 			"<div class=\"content\" >" +
 				"<h3>{{$ctrl.textBinding}}</h3>" +
 				"<div style=\"width: 100%; padding: 3px 7px\">" +
-					"<button ng-click=\"$ctrl.setData()\">Agregar</button>"+
+					"<button ng-click=\"$ctrl.toggleTpl()\">Agregar</button>"+
+                    "<div id=\"tplContent\" ng-include src=\"$ctrl.currentTpl\"></div>"+
 				"</div>"+
-				"<table>" +
+				"<table cellpadding='0' >" +
 					"<thead>" +
 						"<tr>"+
 						"<th>nombre</th>"+
@@ -35,7 +36,7 @@ class CrudComponents implements ng.IComponentOptions{
 						"</tr>"+
 					"</thead>"+
 					"<tbody>" +
-						"<tr ng-repeat=\"(key, value) in $ctrl.dataBinding\">" +
+						"<tr ng-repeat=\"(key, value) in $ctrl.customers\">" +
 							"<td>{{value.name}}</td>"+
 							"<td>{{value.dni}}</td>"+
 							"<td>{{value.sex}}</td>"+

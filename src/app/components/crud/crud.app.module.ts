@@ -3,6 +3,8 @@ import CRUDComponent from "./crud.app.component";
 import CRUDFactory from "./crud.app.factory";
 import CRUDService from "./crud.app.service";
 
+CRUDService.$inject = ['$resource'];
+
 export default angular
 	.module('crud.app.module',[])
 	.factory('crud.app.factory',CRUDFactory)

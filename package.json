@@ -9,6 +9,7 @@
   "devDependencies": {
     "@types/angular": "^1.6.20",
     "@types/angular-ui-router": "^1.1.37",
+    "angular-resource": "^1.6.4",
     "concurrently": "^3.5.0",
     "lite-server": "^2.3.0",
     "pug-cli": "^1.0.0-alpha6",

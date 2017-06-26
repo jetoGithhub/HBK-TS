@@ -11,7 +11,7 @@ function routesConfig($stateProvider: any) {
     var helloState = {
         name: 'main',
         url: '/main',
-        template: '<h3>hello world!  <crud-app-template></crud-app-template></h3>'
+        template: '<crud-app-template></crud-app-template>'
     }
 
     var aboutState = {
