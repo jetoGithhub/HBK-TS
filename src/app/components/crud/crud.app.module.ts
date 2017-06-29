@@ -7,6 +7,6 @@ CRUDService.$inject = ['$resource'];
 
 export default angular
 	.module('crud.app.module',[])
-	.factory('crud.app.factory',CRUDFactory)
+	.factory('CRUDFactory',["crudAppServices",(crudAppServices:any) => new CRUDFactory(crudAppServices)])
 	.service("crudAppServices",CRUDService)
 	.component('crudAppTemplate',CRUDComponent)

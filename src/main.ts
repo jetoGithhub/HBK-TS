@@ -1,28 +1,21 @@
-import 'angular';
+import * as angular from 'angular';
 import '@uirouter/angularjs';
 import 'angular-resource';
 import crud from './app/components/crud/crud.app.module';
+import employeeModule from './app/modules/employee/employee.module';
+import customerModule from './app/modules/customer/customer.module';
 
-export const app = angular.module('app', ['ui.router','ngResource',crud.name]);
+export const app = angular.module('app', [
+    'ui.router',
+    'ngResource',
+    crud.name,
+    employeeModule.name,
+    customerModule.name
+]);
 
 routesConfig.$inject = ['$stateProvider'];
 
-function routesConfig($stateProvider: any) {
-    var helloState = {
-        name: 'main',
-        url: '/main',
-        template: '<crud-app-template></crud-app-template>'
-    }
-
-    var aboutState = {
-        name: 'about',
-        url: '/about',
-        template: '<h3>Its the app!</h3>'
-    }
-
-    $stateProvider.state(helloState);
-    $stateProvider.state(aboutState);
-}
+function routesConfig($stateProvider: any) {}
 
 app.config(routesConfig);
 

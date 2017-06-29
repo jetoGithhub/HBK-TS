@@ -1,53 +1,36 @@
-import {angular} from "../../../globals";
-interface Customer{
-	name:string;
-	dni:number;
-	sex:string
-}
+import Customer from './js/customer.interface';
 export default class{
-    public textBinding:string;
-	public dataBinding:any[];
-	public storeResource:any;
+	static $inject = ['CRUDFactory','$window','$scope',"$state"];
 	public currentTpl:string = '';
 	public customer:Customer;
-	static $inject = ['crudAppServices'];
-	constructor(private crudAppServices) {
-		//this.storeResource = crudAppServices.getStoreResource();
-		this.customers = [];
-		this.customer = {};
-		window.setTimeout(()=>{
-			crudAppServices.query().$promise.then((data:string[])=>{
-				this.customers = data;
-			}).catch((err:any[]) => {
-				console.log('error','\n',err);
-			});
-		}, 1500)
-		
+	public customers:Array<Customer> = [];
+	public url:string;
+	public path:string;
+	constructor(private CRUDFactory:any, private $window:any, private $scope:any,private $state:any) {}
+	$onInit():void {
+		this.getAll();
 	}
-	toggleTpl(){
-		if(document.querySelector("#tplContent")){
-				console.log(this);
-				this.currentTpl = '';
-				document.querySelector("#tplContent").innerHTML='';
-		}else {
-			this.currentTpl = '/frmcustomer.html'
-		}
+	getAll(){
+		this.CRUDFactory.getAll(this.url).then((customers:Array<Customer>)=>{
+			this.customers =customers;
+		}).catch((err:any[]) => {
+			console.log('error','\n',err);
+		});
 	}
-	create(valid){
-		console.info('add data..',this.customer);
-		let data = window.angular.copy(this.customer);
-		//this.dataBinding.push({name:'kjdhfjkshjfksdk'});
-		if(valid) {
-			this.customers.push(data);
-		}
+	create(){
+		this.$state.go(this.path+'Create');
 	}
 
-	getData(){
-
+	delete(dni:number){
+		this.CRUDFactory.delete(this.url,dni).then((customers:Array<Customer>)=>{
+			this.customer= <Customer>{};
+			this.getAll();
+		}).catch((err:any[]) => {
+			console.log('error','\n',err);
+		});
 	}
-
-	getDataById(){
-
+	edit(dni:number){
+		this.$state.go(this.path+'Details',{dni:dni},{reload:true});
 	}
 
 }

@@ -4,13 +4,15 @@ html
         title Demo
         base(href='/')
         meta(charset='UTF-8')
+        link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", rel="stylesheet", integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN", crossorigin="anonymous")
         script(src='node_modules/systemjs/dist/system.src.js')
         script(src='systemjs.config.js')
         script.
             System.import('main.js').catch(function(err){console.error(err.message);});
         style.
             .active { color: blue; font-weight: bold; }
+            a{padding:5px}
     body(ng-cloak)
-        a(ui-sref='main', ui-sref-active='active') Main
-        a(ui-sref='about', ui-sref-active='active') About
+        a(ui-sref='employees', ui-sref-active='active') Employee
+        a(ui-sref='customers', ui-sref-active='active') customer
         ui-view
