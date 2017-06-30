@@ -8,26 +8,30 @@ interface ICRudFactory{
 
 class CrudFactory implements  ICRudFactory{
 	public service:any;
-	constructor(private crudAppServices:any, private _url:string){
+	private _url:string = '';
+	constructor(private crudAppServices:any){
 		this.service = crudAppServices;
 	}
-	getAll(url:string){
-		this.crudAppServices.http(this.url).query().$promise;
+	getAll(){
+		return this.service.http(this.url).query().$promise;
 	}
-	getOne(url:string,id:number){
-		return this.service.http(url).getOne({id:id}).$promise;
+	getOne(id:number){
+		return this.service.http(this.url).getOne({id:id}).$promise;
 	}
-	edit(url:string,id:number,data:Array<T>){
-		return this.service.http(url).update({id:id},data).$promise;
+	edit(id:number,data:Array<T>){
+		return this.service.http(this.url).update({id:id},data).$promise;
 	}
-	create(url:string,data:Array<T>){
-		return this.service.http(url).save(data).$promise;
+	create(data:Array<T>){
+		return this.service.http(this.url).save(data).$promise;
 	}
-	delete(url:string,id:number){
-		this.crudAppServices.http(url).delete({id:id}).$promise;
+	delete(id:number){
+		return this.service.http(this.url).delete({id:id}).$promise;
 	}
 	set url(value:string){
 		this._url = value;
+	}
+	get url(){
+		return this._url;
 	}
 }
 

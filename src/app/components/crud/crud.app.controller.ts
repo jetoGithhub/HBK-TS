@@ -1,4 +1,5 @@
 import Customer from './js/customer.interface';
+import CrudFactory from "./crud.app.factory";
 export default class{
 	static $inject = ['CRUDFactory','$window','$scope',"$state"];
 	public currentTpl:string = '';
@@ -8,10 +9,11 @@ export default class{
 	public path:string;
 	constructor(private CRUDFactory:any, private $window:any, private $scope:any,private $state:any) {}
 	$onInit():void {
+		this.CRUDFactory.url = this.url;
 		this.getAll();
 	}
 	getAll(){
-		this.CRUDFactory.getAll(this.url).then((customers:Array<Customer>)=>{
+		this.CRUDFactory.getAll().then((customers:Array<Customer>)=>{
 			this.customers =customers;
 		}).catch((err:any[]) => {
 			console.log('error','\n',err);
@@ -22,7 +24,7 @@ export default class{
 	}
 
 	delete(dni:number){
-		this.CRUDFactory.delete(this.url,dni).then((customers:Array<Customer>)=>{
+		this.CRUDFactory.delete(dni).then((customers:Array<Customer>)=>{
 			this.customer= <Customer>{};
 			this.getAll();
 		}).catch((err:any[]) => {
